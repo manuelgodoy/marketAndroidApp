@@ -53,11 +53,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp"
         android:ems="10"
+        android:maxLength="12"
+        android:singleLine="true"
         android:hint="@string/Name" >
 
-        <requestFocus />
-
-        <requestFocus />
+   
 
     </EditText>
 

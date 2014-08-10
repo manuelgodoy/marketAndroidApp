@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
 				Intent intent = new Intent(MainActivity.this, MainFeed.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.putExtra("username",e.getText().toString()); //Fake username for now. Need to get from login information
+				intent.putExtra("from", 1);
 				startActivity(intent);
 			};
 		});		
