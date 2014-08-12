@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -60,13 +61,13 @@ public class MainFeed extends Activity {
 		TextView t = (TextView)findViewById(R.id.textView1);
 		t.setText("This is where the main feed would go ");
 		
-		Button b = (Button)findViewById(R.id.button1);
-		b.setOnClickListener(new OnClickListener() {
+		//Button b = (Button)findViewById(R.id.button1);
+/*		b.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(MainFeed.this, PostActivity.class);
 				startActivity(intent);
 			};
-		});		
+		});		*/
 	}
 	
 	public void success(List<ParseObject> l) {
@@ -78,5 +79,20 @@ public class MainFeed extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_post:
+			Intent intent = new Intent(MainFeed.this, PostActivity.class);
+			startActivity(intent);
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+
 
 }
