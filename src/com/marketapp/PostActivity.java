@@ -90,8 +90,8 @@ public class PostActivity extends Activity implements TaskFragment.TaskCallbacks
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post);		
 		
-		Intent serviceIntent = new Intent(this, LocationService.class);
-		startService(serviceIntent);
+		//Intent serviceIntent = new Intent(this, LocationService.class);
+		//startService(serviceIntent);
 		//Intent intent = getIntent();
 		Parse.initialize(this, "VzCaiR1xAxw1Xzs7n68DFJvNo8C8Ov80Np4DVNEV", "3Du6C0fPE8IkrLYiPS3MQrl0oSchFU2SkeKzhB1i");
 		

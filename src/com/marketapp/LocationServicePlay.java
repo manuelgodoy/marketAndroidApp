@@ -460,7 +460,7 @@ public class LocationServicePlay extends Service implements LocationListener,  G
 	
 	
 	
-	public static class ErrorDialogFragment extends DialogFragment {
+/*	public static class ErrorDialogFragment extends DialogFragment {
         // Global field to contain the error dialog
         private Dialog mDialog;
         // Default constructor. Sets the dialog field to null
@@ -477,7 +477,7 @@ public class LocationServicePlay extends Service implements LocationListener,  G
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return mDialog;
         }
-    }
+    }*/
 
 
 	

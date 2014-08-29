@@ -66,7 +66,7 @@ public class MainFeed extends ActionBarActivity implements	NavigationDrawerFragm
 		
 		//locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);				
 		//locationManager.requestLocationUpdates(getProvider(),10,10,locationListener);
-		Intent serviceIntent = new Intent(this, LocationService.class);
+		Intent serviceIntent = new Intent(this, LocationServicePlay.class);
 		startService(serviceIntent);
 		Intent intent = getIntent();
 		switch (intent.getIntExtra("from",0)) {
@@ -251,7 +251,7 @@ public class MainFeed extends ActionBarActivity implements	NavigationDrawerFragm
 	
 	protected void onResume() {
 		super.onResume();
-		IntentFilter filter = new IntentFilter(LocationService.BROADCAST_ACTION);		
+		IntentFilter filter = new IntentFilter(LocationServicePlay.BROADCAST_ACTION);		
 		registerReceiver(lr, filter);
 	}
 	
