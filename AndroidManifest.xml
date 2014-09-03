@@ -18,7 +18,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <service android:name=".LocationServicePlay" />
+        <service android:name=".LocationService" />
         <activity
             android:name="com.marketapp.MainActivity"
             android:label="@string/app_name"
@@ -37,6 +37,7 @@
             android:label="PostActivity"
             android:windowSoftInputMode="stateHidden">
         </activity>	
+  
     </application>
 
 </manifest>

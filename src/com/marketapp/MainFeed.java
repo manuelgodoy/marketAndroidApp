@@ -20,6 +20,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 //import android.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,7 +48,6 @@ public class MainFeed extends ActionBarActivity implements	NavigationDrawerFragm
 	
 	locationReceiver lr = new locationReceiver();
 	
-	
 	ParseGeoPoint point = new ParseGeoPoint();
 	
 	@Override
@@ -60,14 +60,15 @@ public class MainFeed extends ActionBarActivity implements	NavigationDrawerFragm
 		mTitle = getTitle();		
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,(DrawerLayout) findViewById(R.id.drawer_layout));
 		
-		
-		
 		Parse.initialize(this, "VzCaiR1xAxw1Xzs7n68DFJvNo8C8Ov80Np4DVNEV", "3Du6C0fPE8IkrLYiPS3MQrl0oSchFU2SkeKzhB1i");
 		
 		//locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);				
 		//locationManager.requestLocationUpdates(getProvider(),10,10,locationListener);
-		Intent serviceIntent = new Intent(this, LocationServicePlay.class);
+		
+		
+		Intent serviceIntent = new Intent(this, LocationService.class);
 		startService(serviceIntent);
+		//Intent intent = serviceIntent;
 		Intent intent = getIntent();
 		switch (intent.getIntExtra("from",0)) {
 		case (1):
@@ -77,10 +78,6 @@ public class MainFeed extends ActionBarActivity implements	NavigationDrawerFragm
 			String toast = intent.getStringExtra("Post");
 			Toast.makeText(this, "Post " +toast+ " has been posted." , Toast.LENGTH_LONG).show();
 		}
-		
-		
-		
-
 		
 		LoadPhotos load = new LoadPhotos();
 		load.execute();
@@ -267,18 +264,19 @@ public class MainFeed extends ActionBarActivity implements	NavigationDrawerFragm
 	}
 	
 	public class locationReceiver extends BroadcastReceiver {
-		
+		//private locationReceiver mLogReceiver = new locationReceiver();
+		@Override
 		public void onReceive (Context context, Intent intent) {
-
-			//Double latitude = intent.getExtras().getDouble("Latitude");
-			//Double longitude = intent.getExtras().getDouble("Longitude");
-			String address = intent.getExtras().getString("Address");
-			Toast.makeText(getApplicationContext(), "Address: " +address , Toast.LENGTH_SHORT ).show();
+			Log.i("Received","intent received");
+			Double latitude = intent.getDoubleExtra("Latitude",0);
+			Double longitude = intent.getDoubleExtra("Longitude",0);
+			//String address = intent.getExtras().getString("Address");
+			Toast.makeText(context, " cono " + latitude + longitude , Toast.LENGTH_SHORT ).show();
 
 		}
 	}
-
-
-
-
 }
+	
+	
+	
+	

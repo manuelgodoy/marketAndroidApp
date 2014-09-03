@@ -20,7 +20,7 @@ public class LocationService extends Service  {
 	public MyLocationListener listener;
 	public Location previousBestLocation = null;
 
-	Intent intent;
+	Intent intent = new Intent();
 	int counter = 0;
 
     @Override
@@ -35,8 +35,8 @@ public class LocationService extends Service  {
     {      
     	locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     	listener = new MyLocationListener();        
-    	locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 4000, 10, (LocationListener) listener);
-    	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 4000, 10, listener);
+    	locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 4000, 0, listener);
+    	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 4000, 0, listener);
 		return START_NOT_STICKY;
     }
 
@@ -132,15 +132,16 @@ public class MyLocationListener implements LocationListener {
 
 	public void onLocationChanged(final Location loc)
 	{
-		Log.i("**************************************", "Location changed");
+		
 		if(isBetterLocation(loc, previousBestLocation)) {
-			loc.getLatitude();
-			loc.getLongitude();             
-			intent.putExtra("Latitude", loc.getLatitude());
-			intent.putExtra("Longitude", loc.getLongitude());
+			Log.i("*****", "Location changed");
+			Double latitude = loc.getLatitude();
+			Double longitude = loc.getLongitude();             
+			intent.putExtra("Latitude", latitude);
+			intent.putExtra("Longitude", longitude);
 			
-			//intent.putExtra("Provider", loc.getProvider());   
-			
+			intent.putExtra("Provider", loc.getProvider());   
+			//Toast.makeText( getApplicationContext(), " " + latitude + longitude, Toast.LENGTH_SHORT ).show();
 			sendBroadcast(intent);          
 
 		}                               
