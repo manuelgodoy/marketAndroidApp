@@ -199,11 +199,22 @@ public class PostActivity extends Activity implements TaskFragment.TaskCallbacks
 				testObject.put("Title", getTitle(t));
 				testObject.put("location", point);				
 				
-				byte[] dataPhotos = new byte[(int) photoFiles.get(0).length()];
+				
+				byte[] dataPhotos;
+				if (!photoFiles.isEmpty()){
+					dataPhotos = new byte[(int) photoFiles.get(0).length()];
+				}
+				else {
+					dataPhotos = new byte[0];
+				}
+				
+				
 				try {
-			        BufferedInputStream buf = new BufferedInputStream(new FileInputStream(photoFiles.get(0)));
-			        buf.read(dataPhotos, 0, dataPhotos.length);
-			        buf.close();
+					if (dataPhotos.length>0){
+						BufferedInputStream buf = new BufferedInputStream(new FileInputStream(photoFiles.get(0)));
+						buf.read(dataPhotos, 0, dataPhotos.length);
+						buf.close();
+					}
 			    } catch (FileNotFoundException e) {
 			        // TODO Auto-generated catch block
 			        e.printStackTrace();
@@ -247,11 +258,7 @@ public class PostActivity extends Activity implements TaskFragment.TaskCallbacks
          /* Create a new location client, using the enclosing class to
          * handle callbacks. */
         mLocationClient = new LocationClient(this, this, this);		
-       /* if (mLocationClient.isConnected()) {
-        	Log.i("****","Connected");
-        	getAddress();
-        }*/
-        //getLocation();
+
        
 
 	}	

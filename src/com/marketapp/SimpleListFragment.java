@@ -7,7 +7,9 @@ import java.util.List;
 
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -33,8 +35,10 @@ public class SimpleListFragment extends ListFragment    {
 		titles = currentActivity.getPhotos();
 		//mTitles = new String[photos.size()];
 		mTitles = new String[titles.size()];
-		for (ParseObject t : titles) {			
-			address = getAddress(t.getParseGeoPoint("location"));	
+		for (ParseObject t : titles) {	
+			getAddress ga = new getAddress();
+			ga.execute(t);
+			//address = getAddress(t.getParseGeoPoint("location"));	
 			photo = t.getParseFile("photo");			
 			/*try {
 				//byte[] photoData = photo.getData();
@@ -56,7 +60,7 @@ public class SimpleListFragment extends ListFragment    {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Toast.makeText(this.getActivity(), mTitles[position], Toast.LENGTH_SHORT).show();
 	}	
-	
+	/*
 	public String getAddress(ParseGeoPoint point) { // Too slow must be moved to server or background!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		Geocoder coder = new Geocoder(getActivity().getApplicationContext());
 		double lat = point.getLatitude();
@@ -69,11 +73,51 @@ public class SimpleListFragment extends ListFragment    {
 			}
 		} catch (IOException e) {e.printStackTrace();}
 		return null;		
-	}
+	}*/
 	
 	public double getDistance(ParseGeoPoint here, ParseGeoPoint point) {
 		distance = here.distanceInMilesTo(point);
 		return distance;
+	}
+	
+	private class getAddress extends AsyncTask<ParseObject, String, String> {
+		//ParseObject mParseObject = new ParseObject();
+		
+		
+		@Override
+		protected void onPreExecute () {
+		}
+		
+		@Override
+		protected String doInBackground (ParseObject... params) {
+			ParseObject mParseObject = params[0];
+			ParseGeoPoint mParseGeoPoint = mParseObject.getParseGeoPoint("location");
+
+			Geocoder coder = new Geocoder(getActivity().getApplicationContext());
+			double lat = mParseGeoPoint.getLatitude();
+			double lon = mParseGeoPoint.getLongitude(); 
+			List<Address> geocodeResults;
+			try {
+				geocodeResults = coder.getFromLocation(lat,lon,1);
+				for (Address a : geocodeResults){				
+					return (a.getLocality());
+				}
+			} catch (IOException e) {e.printStackTrace();}
+			return null;
+		
+		}
+		
+		@Override
+		protected void onPostExecute (String result) {
+			//Log.i("***********", result);
+			address = result;
+			//mProgressBar.setVisibility(View.GONE);
+		}
+	}
+	
+	public String setAddress(String mAddress){
+		return mAddress;
+		
 	}
 	
 } 
