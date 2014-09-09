@@ -7,7 +7,7 @@
 	<uses-permission android:name="android.permission.INTERNET"  />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	
 	
     <uses-sdk
         android:minSdkVersion="11"
@@ -36,7 +36,17 @@
             android:name="com.marketapp.PostActivity"
             android:label="PostActivity"
             android:windowSoftInputMode="stateHidden">
-        </activity>	
+        </activity>
+        <service
+            android:name="com.example.android.location.ReceiveUpdatesIntentService"
+            android:exported="false"
+            android:label="@string/app_name" >
+        </service>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
     </application>
 
 </manifest>

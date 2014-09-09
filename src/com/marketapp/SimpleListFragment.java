@@ -34,7 +34,7 @@ public class SimpleListFragment extends ListFragment    {
 		//mTitles = new String[photos.size()];
 		mTitles = new String[titles.size()];
 		for (ParseObject t : titles) {			
-			address = getAddress(t.getDouble("Latitude"),t.getDouble("Longitude"));	
+			address = getAddress(t.getParseGeoPoint("location"));	
 			photo = t.getParseFile("photo");			
 			/*try {
 				//byte[] photoData = photo.getData();
@@ -57,8 +57,10 @@ public class SimpleListFragment extends ListFragment    {
 		Toast.makeText(this.getActivity(), mTitles[position], Toast.LENGTH_SHORT).show();
 	}	
 	
-	public String getAddress(double lat, double lon) { // Too slow must be moved to server!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	public String getAddress(ParseGeoPoint point) { // Too slow must be moved to server or background!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		Geocoder coder = new Geocoder(getActivity().getApplicationContext());
+		double lat = point.getLatitude();
+		double lon = point.getLongitude(); 
 		List<Address> geocodeResults;
 		try {
 			geocodeResults = coder.getFromLocation(lat,lon,1);
