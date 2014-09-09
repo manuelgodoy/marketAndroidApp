@@ -47,7 +47,6 @@ public class MainFeed extends ActionBarActivity implements	NavigationDrawerFragm
 	
 	locationReceiver lr = new locationReceiver();
 	
-	
 	ParseGeoPoint point = new ParseGeoPoint();
 	
 	@Override
@@ -59,8 +58,6 @@ public class MainFeed extends ActionBarActivity implements	NavigationDrawerFragm
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();		
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,(DrawerLayout) findViewById(R.id.drawer_layout));
-		
-		
 		
 		Parse.initialize(this, "VzCaiR1xAxw1Xzs7n68DFJvNo8C8Ov80Np4DVNEV", "3Du6C0fPE8IkrLYiPS3MQrl0oSchFU2SkeKzhB1i");
 		
@@ -77,10 +74,6 @@ public class MainFeed extends ActionBarActivity implements	NavigationDrawerFragm
 			String toast = intent.getStringExtra("Post");
 			Toast.makeText(this, "Post " +toast+ " has been posted." , Toast.LENGTH_LONG).show();
 		}
-		
-		
-		
-
 		
 		LoadPhotos load = new LoadPhotos();
 		load.execute();
@@ -277,8 +270,4 @@ public class MainFeed extends ActionBarActivity implements	NavigationDrawerFragm
 
 		}
 	}
-
-
-
-
 }
